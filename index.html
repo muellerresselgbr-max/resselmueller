@@ -457,6 +457,10 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
 .pick input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
 .form-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px}
 .note{font-size:.82rem;color:var(--muted);max-width:60ch}
+.note a,.guide-free a{color:inherit;text-underline-offset:2px}
+.foot-legal{display:flex;gap:18px}
+.foot-bottom a{color:inherit;text-decoration:none}
+.foot-bottom a:hover{text-decoration:underline;text-underline-offset:3px}
 .result{display:grid;gap:14px;padding:18px;border-radius:12px;border:1px solid var(--ok);background:var(--ok-soft)}
 .result h3{font-family:var(--sans);font-weight:600;font-size:1.02rem;color:var(--ok)}
 .result pre{margin:0;padding:14px;border-radius:10px;background:var(--surface);border:1px solid var(--line);font-family:var(--mono);font-size:.8rem;line-height:1.6;white-space:pre-wrap;word-break:break-word;max-height:260px;overflow:auto;color:var(--ink)}
@@ -913,7 +917,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
           <li><span class="ck"><svg aria-hidden="true"><use href="#i-check"/></svg></span><div><b>Kanäle, die funktionieren</b><span>Wo Techniker tatsächlich zu finden sind und wo Anzeigen ins Leere laufen.</span></div></li>
           <li><span class="ck"><svg aria-hidden="true"><use href="#i-check"/></svg></span><div><b>Schneller zur Freigabe im Betrieb</b><span>Wie neue Techniker zügig ihre Company Authorisation erhalten und bleiben.</span></div></li>
         </ul>
-        <p class="guide-free"><b>Kostenlos</b> als PDF per Mail. Kein Newsletter, keine Weitergabe Ihrer Daten.</p>
+        <p class="guide-free"><b>Kostenlos</b> als PDF per Mail. Kein Newsletter, keine Weitergabe Ihrer Daten. Mehr dazu in unserer <a href="datenschutz/">Datenschutzerklärung</a>.</p>
 
         <form class="guide-form" id="guideForm" novalidate aria-label="Leitfaden anfordern">
           <div class="fields">
@@ -1014,7 +1018,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
             <button class="btn" type="submit">Anfrage erstellen <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
             <span class="status" id="formStatus" role="status" aria-live="polite"></span>
           </div>
-          <p class="note">Die Seite speichert und versendet nichts selbst. Im nächsten Schritt öffnen Sie Ihr Mailprogramm oder kopieren den fertigen Text an kontakt@ressel-mueller.de.</p>
+          <p class="note">Die Seite speichert und versendet nichts selbst. Im nächsten Schritt öffnen Sie Ihr Mailprogramm oder kopieren den fertigen Text an kontakt@ressel-mueller.de. Hinweise zum Datenschutz finden Sie in unserer <a href="datenschutz/">Datenschutzerklärung</a>.</p>
 
           <div class="result" id="result" hidden>
             <h3>Ihre Anfrage ist fertig. Bitte noch an uns senden.</h3>
@@ -1137,6 +1141,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
           <span class="hint block" id="h-t-consent"></span>
           <div class="form-actions"><button class="btn" type="submit">Profil senden <svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
           <p class="note">Die Seite speichert nichts selbst. Im nächsten Schritt öffnen Sie Ihr Mailprogramm oder kopieren den fertigen Text an kontakt@ressel-mueller.de.</p>
+          <p class="note">Mehr dazu in unserer <a href="datenschutz/">Datenschutzerklärung</a>.</p>
           <div class="result" id="tpResult" hidden>
             <h3>Fast geschafft. Senden Sie diese Mail ab, wir melden uns persönlich.</h3>
             <pre id="tpText"></pre>
@@ -1175,6 +1180,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
           <span class="hint block" id="h-gc-consent"></span>
           <label class="consent"><input type="checkbox" id="gc-pool"><span>Nehmen Sie mich auch in den Talentpool auf. Mein Profil geht nur mit meiner Zustimmung an Arbeitgeber.</span></label>
           <div class="form-actions"><button class="btn" type="submit">Angaben senden <svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+          <p class="note">Mehr dazu in unserer <a href="datenschutz/">Datenschutzerklärung</a>.</p>
           <div class="result" id="gcResult" hidden>
             <h3>Danke. Senden Sie diese Mail ab, den Report bekommen Sie als Erstes.</h3>
             <pre id="gcText"></pre>
@@ -1251,7 +1257,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
         <div><h4>Kontakt</h4><ul><li><span>kontakt@ressel-mueller.de</span></li><li><span>Hamburg</span></li></ul></div>
       </div>
     </div>
-    <div class="foot-bottom"><span>© 2026 Ressel &amp; Müller</span><span>Personalvermittlung Luftfahrttechnik · Hamburg</span></div>
+    <div class="foot-bottom"><span>© 2026 Ressel &amp; Müller</span><span class="foot-legal"><a href="impressum/">Impressum</a><a href="datenschutz/">Datenschutz</a></span><span>Personalvermittlung Luftfahrttechnik · Hamburg</span></div>
   </div>
 </footer>
 
@@ -1693,6 +1699,9 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
   var I18N_SKIP = "svg, script, style, pre, .status, .hint";
   var LETTERS = /[A-Za-zÄÖÜäöüß]/;
   var EN = /*EN-BEGIN*/{
+"Mehr dazu in unserer <a href=\"datenschutz/\">Datenschutzerklärung<\/a>.": "More in our <a href=\"datenschutz/\">privacy policy<\/a> (in German).",
+"Impressum": "Legal notice",
+"Datenschutz": "Privacy",
 "Ablauf": "Process",
 "Gehaltscheck": "Salary check",
 "Empfehlen": "Referrals",
@@ -1867,6 +1876,9 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
 "Kollegen empfehlen": "Recommend colleagues"
 }/*ATTR-END*/;
   var PT = /*PT-BEGIN*/{
+"Mehr dazu in unserer <a href=\"datenschutz/\">Datenschutzerklärung<\/a>.": "Mais informações na nossa <a href=\"datenschutz/\">política de privacidade<\/a> (em alemão).",
+"Impressum": "Aviso legal",
+"Datenschutz": "Privacidade",
 "Ablauf": "Processo",
 "Gehaltscheck": "Análise salarial",
 "Empfehlen": "Recomendar",
@@ -2043,6 +2055,9 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
 "Kollegen empfehlen": "Recomendar colegas"
 }/*PTATTR-END*/;
   var PL = /*PL-BEGIN*/{
+"Mehr dazu in unserer <a href=\"datenschutz/\">Datenschutzerklärung<\/a>.": "Więcej w naszej <a href=\"datenschutz/\">polityce prywatności<\/a> (w języku niemieckim).",
+"Impressum": "Nota prawna",
+"Datenschutz": "Prywatność",
 "Ablauf": "Proces",
 "Gehaltscheck": "Analiza płac",
 "Empfehlen": "Poleć kolegów",
