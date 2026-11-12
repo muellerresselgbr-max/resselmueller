@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="de">
 <head>
-<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self' mailto:"><meta name="referrer" content="strict-origin-when-cross-origin">
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://forms.zohopublic.eu; base-uri 'self'; form-action 'self' mailto:"><meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <title>Ressel &amp; Müller Aviation Recruitment</title>
@@ -466,6 +466,8 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
 .result h3{font-family:var(--sans);font-weight:600;font-size:1.02rem;color:var(--ok)}
 .result pre{margin:0;padding:14px;border-radius:10px;background:var(--surface);border:1px solid var(--line);font-family:var(--mono);font-size:.8rem;line-height:1.6;white-space:pre-wrap;word-break:break-word;max-height:260px;overflow:auto;color:var(--ink)}
 .result .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.result p{margin:0;color:var(--ink-2)}
+.btn[aria-busy="true"]{opacity:.6;cursor:progress}
 
 /* Candidate band */
 .cand{background:var(--ink);color:var(--on-ink);border-radius:var(--r);padding:clamp(24px,3.6vw,40px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 40px;margin-top:clamp(24px,3vw,36px)}
@@ -918,7 +920,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
           <li><span class="ck"><svg aria-hidden="true"><use href="#i-check"/></svg></span><div><b>Kanäle, die funktionieren</b><span>Wo Techniker tatsächlich zu finden sind und wo Anzeigen ins Leere laufen.</span></div></li>
           <li><span class="ck"><svg aria-hidden="true"><use href="#i-check"/></svg></span><div><b>Schneller zur Freigabe im Betrieb</b><span>Wie neue Techniker zügig ihre Company Authorisation erhalten und bleiben.</span></div></li>
         </ul>
-        <p class="guide-free"><b>Kostenlos</b> als PDF per Mail. Kein Newsletter, keine Weitergabe Ihrer Daten. Mehr dazu in unserer <a href="datenschutz/">Datenschutzerklärung</a>.</p>
+        <p class="guide-free"><b>Kostenlos</b> als PDF zum sofortigen Download. Kein Newsletter, keine Weitergabe Ihrer Daten. Mehr dazu in unserer <a href="datenschutz/">Datenschutzerklärung</a>.</p>
 
         <form class="guide-form" id="guideForm" novalidate aria-label="Leitfaden anfordern">
           <div class="fields">
@@ -928,6 +930,11 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
           </div>
           <div class="form-actions">
             <button class="btn" type="submit">Leitfaden anfordern <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          </div>
+          <div class="result" id="gOk" hidden tabindex="-1">
+            <h3>Danke. Ihr Leitfaden ist bereit.</h3>
+            <p>Laden Sie das PDF direkt herunter. Bei Fragen erreichen Sie uns jederzeit unter kontakt@ressel-mueller.de.</p>
+            <div class="row"><a class="btn sm" href="leitfaden/Ressel-Mueller-Leitfaden.pdf" download>Leitfaden herunterladen (PDF)</a></div>
           </div>
           <div class="result" id="gResult" hidden>
             <h3>Fast geschafft. Senden Sie diese Mail ab, den Leitfaden erhalten Sie als Antwort.</h3>
@@ -1019,8 +1026,12 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
             <button class="btn" type="submit">Anfrage erstellen <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
             <span class="status" id="formStatus" role="status" aria-live="polite"></span>
           </div>
-          <p class="note">Die Seite speichert und versendet nichts selbst. Im nächsten Schritt öffnen Sie Ihr Mailprogramm oder kopieren den fertigen Text an kontakt@ressel-mueller.de. Hinweise zum Datenschutz finden Sie in unserer <a href="datenschutz/">Datenschutzerklärung</a>.</p>
+          <p class="note">Ihre Anfrage geht verschlüsselt direkt an uns. Hinweise zum Datenschutz finden Sie in unserer <a href="datenschutz/">Datenschutzerklärung</a>.</p>
 
+          <div class="result" id="inqOk" hidden tabindex="-1">
+            <h3>Danke, Ihre Anfrage ist bei uns.</h3>
+            <p>Wir melden uns persönlich bei Ihnen, um das Erstgespräch zu vereinbaren.</p>
+          </div>
           <div class="result" id="result" hidden>
             <h3>Ihre Anfrage ist fertig. Bitte noch an uns senden.</h3>
             <pre id="resultText"></pre>
@@ -1141,8 +1152,12 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
           <label class="consent" id="c-t-consent"><input type="checkbox" id="t-consent"><span>Ich bin einverstanden, dass Ressel &amp; Müller meine Angaben speichert, um mir passende Stellen anzubieten. Mein Profil geht nur mit meiner Zustimmung an Arbeitgeber. Widerruf jederzeit per Mail.</span></label>
           <span class="hint block" id="h-t-consent"></span>
           <div class="form-actions"><button class="btn" type="submit">Profil senden <svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
-          <p class="note">Die Seite speichert nichts selbst. Im nächsten Schritt öffnen Sie Ihr Mailprogramm oder kopieren den fertigen Text an kontakt@ressel-mueller.de.</p>
+          <p class="note">Ihre Angaben gehen verschlüsselt direkt an uns.</p>
           <p class="note">Mehr dazu in unserer <a href="datenschutz/">Datenschutzerklärung</a>.</p>
+          <div class="result" id="tpOk" hidden tabindex="-1">
+            <h3>Danke, Ihr Profil ist bei uns.</h3>
+            <p>Wir melden uns persönlich, sobald eine Stelle zu Ihnen passt.</p>
+          </div>
           <div class="result" id="tpResult" hidden>
             <h3>Fast geschafft. Senden Sie diese Mail ab, wir melden uns persönlich.</h3>
             <pre id="tpText"></pre>
@@ -1175,6 +1190,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
             <div class="field"><label for="gc-region">Region</label><select id="gc-region"><option value="">Bitte wählen</option><option value="Hamburg">Hamburg</option><option value="Norddeutschland">Norddeutschland</option><option value="Übriges Deutschland">Übriges Deutschland</option><option value="Ausland">Ausland</option></select></div>
             <div class="field"><label for="gc-mode">Arbeit</label><select id="gc-mode"><option value="">Bitte wählen</option><option value="Line Maintenance">Line Maintenance</option><option value="Base Maintenance">Base Maintenance</option><option value="Beides">Beides</option></select></div>
             <div class="field"><label for="gc-shift">Dienst</label><select id="gc-shift"><option value="">Bitte wählen</option><option value="Tagdienst">Tagdienst</option><option value="Wechselschicht">Wechselschicht</option><option value="Nachtschicht">Nachtschicht</option></select></div>
+            <div class="field full"><label for="gc-mail">Mailadresse <span class="req">(Pflicht)</span></label><input id="gc-mail" type="email" autocomplete="email" inputmode="email" placeholder="name@beispiel.de" required><span class="hint" id="h-gc-mail"></span></div>
             <div class="field full"><label for="gc-salary">Bruttojahresgehalt inklusive Zulagen <span class="req">(Pflicht)</span></label><select id="gc-salary" required><option value="">Bitte wählen</option><option value="Unter 45.000 €">Unter 45.000 €</option><option value="45.000 bis 55.000 €">45.000 bis 55.000 €</option><option value="55.000 bis 65.000 €">55.000 bis 65.000 €</option><option value="65.000 bis 75.000 €">65.000 bis 75.000 €</option><option value="75.000 bis 85.000 €">75.000 bis 85.000 €</option><option value="Über 85.000 €">Über 85.000 €</option></select><span class="hint" id="h-gc-salary"></span></div>
           </div>
           <label class="consent" id="c-gc-consent"><input type="checkbox" id="gc-consent"><span>Ich bin einverstanden, dass Ressel &amp; Müller meine Angaben speichert und nur zusammengefasst auswertet.</span></label>
@@ -1182,6 +1198,10 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
           <label class="consent"><input type="checkbox" id="gc-pool"><span>Nehmen Sie mich auch in den Talentpool auf. Mein Profil geht nur mit meiner Zustimmung an Arbeitgeber.</span></label>
           <div class="form-actions"><button class="btn" type="submit">Angaben senden <svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
           <p class="note">Mehr dazu in unserer <a href="datenschutz/">Datenschutzerklärung</a>.</p>
+          <div class="result" id="gcOk" hidden tabindex="-1">
+            <h3>Danke für Ihre Angaben.</h3>
+            <p>Den Gehaltsreport schicken wir Ihnen als Erstes, sobald genug Daten zusammen sind.</p>
+          </div>
           <div class="result" id="gcResult" hidden>
             <h3>Danke. Senden Sie diese Mail ab, den Report bekommen Sie als Erstes.</h3>
             <pre id="gcText"></pre>
@@ -1308,6 +1328,32 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
     pl: { errName: "Podaj imię i nazwisko.", errMail: "Podaj poprawny adres mailowy.", errLic: "Wybierz swoją licencję.", errSalary: "Wybierz swój przedział wynagrodzenia.", errConsentTp: "Potwierdź zgodę, abyśmy mogli zapisać Twój profil.", errConsentGc: "Potwierdź zgodę na analizę Twoich danych.", subj: "Temat", to: "Do", copiedTo: "Tekst skopiowany. Wyślij go teraz na adres " + EMAIL + ".", referCopied: "Tekst skopiowany. Wyślij go teraz przez WhatsApp lub mailem.", copyFail: "Nie udało się skopiować. Zaznacz tekst i skopiuj go ręcznie." }
   };
   function t(k) { return S[applied][k]; }
+  /* Form delivery: posts the entries to our Zoho Forms inbox in the background. If that fails, the old mail fallback is shown. */
+  var ZF = "https://forms.zohopublic.eu/elwinpolar1/form/WebsiteAnfragen/formperma/7ruwO2o8eDqo5iY1iRR118fLVN0n5-A7ZO8Z3AbLN2U/htmlRecords/submit";
+  function sendForm(formEl, d, okId, fallback) {
+    var btn = formEl.querySelector('button[type="submit"]');
+    if (btn.getAttribute("aria-busy") === "true") return;
+    btn.setAttribute("aria-busy", "true");
+    var fd = new FormData();
+    [["zf_referrer_name", ""], ["zf_redirect_url", ""], ["zc_gad", ""], ["SingleLine2", d.f], ["SingleLine3", d.n], ["Email", d.m], ["SingleLine4", d.c], ["SingleLine", d.p], ["SingleLine1", d.s], ["MultiLine", d.b]].forEach(function (x) {
+      fd.append(x[0], String(x[1] || "").slice(0, x[0] === "MultiLine" ? 65000 : 255));
+    });
+    var done = false, timer = 0;
+    function finish(ok) {
+      if (done) return;
+      done = true; clearTimeout(timer);
+      btn.removeAttribute("aria-busy");
+      if (!ok) { fallback(); return; }
+      Array.prototype.forEach.call(formEl.querySelectorAll(".result"), function (r) { r.hidden = r.id !== okId; });
+      var box = $(okId);
+      box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      try { box.focus({ preventScroll: true }); } catch (e) {}
+    }
+    timer = setTimeout(function () { finish(false); }, 15000);
+    try {
+      fetch(ZF, { method: "POST", body: fd, mode: "no-cors", credentials: "omit", cache: "no-store" }).then(function () { finish(true); }, function () { finish(false); });
+    } catch (e) { finish(false); }
+  }
   var VAL_EN = {
     "B1 und B2": "B1 and B2", "Kategorie A": "Category A", "Noch keine Lizenz": "No licence yet", "CAMO oder Planning": "CAMO or planning", "Mechaniker oder Avioniker ohne Lizenz": "Mechanic or avionics technician without licence",
     "Norddeutschland": "Northern Germany", "Ganz Deutschland": "All of Germany", "Europa": "Europe", "Offen": "Open", "Übriges Deutschland": "Rest of Germany", "Ausland": "Outside Germany",
@@ -1377,11 +1423,14 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
     if (firstBad) { firstBad.focus(); return; }
     var subject = "Leitfaden anfordern: Techniker finden und halten";
     var body = ["Guten Tag,", "", "bitte senden Sie mir den Leitfaden „Freigabeberechtigte Techniker finden und halten“ als PDF.", "", "Name: " + n, "Mail: " + m].concat(f ? ["Unternehmen: " + f] : []).concat(["", "Viele Grüße", n]).join("\n");
+    sendForm(this, { f: "Leitfaden", n: n, m: m, c: f, p: "", s: subject, b: body }, "gOk", function () {
+    $("gOk").hidden = true;
     $("gResultText").textContent = t("subj") + ": " + subject + "\n\n" + body;
     $("gMailLink").href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
     $("gResult").hidden = false;
     $("gResult").scrollIntoView({ behavior: "smooth", block: "nearest" });
     $("gCopy").onclick = function () { copyText(t("to") + ": " + EMAIL + "\n" + t("subj") + ": " + subject + "\n\n" + body, $("gCopyStatus"), t("copiedTo")); };
+    });
   });
   ["g-name", "g-mail"].forEach(function (id) {
     $(id).addEventListener("input", function () { if (this.parentElement.classList.contains("err")) { this.parentElement.classList.remove("err"); $("h-" + id).textContent = ""; this.setAttribute("aria-invalid", "false"); } });
@@ -1559,16 +1608,19 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
     var body = lines.join("\n");
     var subject = "Suchauftrag: " + (rollen.length ? rollen.join(", ") : "Luftfahrttechnik") + " für " + firma;
 
+    $("formStatus").textContent = "";
+    sendForm(form, { f: val("termin") ? "Arbeitgeber, Terminwunsch" : "Arbeitgeber", n: name, m: mail, c: firma, p: val("tel"), s: subject, b: body }, "inqOk", function () {
+    $("inqOk").hidden = true;
     $("resultText").textContent = t("subj") + ": " + subject + "\n\n" + body;
     $("mailLink").href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
     var res = $("result");
     res.hidden = false;
-    $("formStatus").textContent = "";
     res.scrollIntoView({ behavior: "smooth", block: "nearest" });
 
     $("copyText").onclick = function () {
       copyText(t("to") + ": " + EMAIL + "\n" + t("subj") + ": " + subject + "\n\n" + body, $("copyStatus"), t("copiedTo"));
     };
+    });
   });
 
   ["firma", "name", "mail"].forEach(function (id) {
@@ -1585,6 +1637,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
   }
   function v(id) { return ($(id).value || "").trim(); }
   function showMail(prefix, subject, body) {
+    $(prefix + "Ok").hidden = true;
     $(prefix + "Text").textContent = t("subj") + ": " + subject + "\n\n" + body;
     $(prefix + "Mail").href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
     $(prefix + "Result").hidden = false;
@@ -1638,12 +1691,13 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
       lines.push(""); lines.push("Viele Grüße"); lines.push(v("t-name"));
       subject = "Talentpool: " + v("t-lic") + (v("t-wish") ? ", " + v("t-wish") : "");
     }
-    showMail("tp", subject, lines.join("\n"));
+    sendForm($("tpForm"), { f: "Talentpool", n: v("t-name"), m: v("t-mail"), c: "", p: v("t-tel"), s: subject, b: lines.join("\n") }, "tpOk", function () { showMail("tp", subject, lines.join("\n")); });
   });
 
   $("gcForm").addEventListener("submit", function (e) {
     e.preventDefault();
     mark("gc-lic", !!v("gc-lic"), t("errLic"));
+    mark("gc-mail", /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v("gc-mail")), t("errMail"));
     mark("gc-salary", !!v("gc-salary"), t("errSalary"));
     mark("gc-consent", $("gc-consent").checked, t("errConsentGc"));
     if (firstInvalid(this)) return;
@@ -1685,10 +1739,10 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
       lines.push(""); lines.push("Viele Grüße");
       subject = "Gehaltscheck: " + v("gc-lic") + (v("gc-region") ? ", " + v("gc-region") : "");
     }
-    showMail("gc", subject, lines.join("\n"));
+    sendForm($("gcForm"), { f: $("gc-pool").checked ? "Gehaltscheck und Talentpool" : "Gehaltscheck", n: "", m: v("gc-mail"), c: "", p: "", s: subject, b: lines.join("\n") }, "gcOk", function () { showMail("gc", subject, lines.join("\n")); });
   });
 
-  ["t-name", "t-mail", "t-lic", "gc-lic", "gc-salary"].forEach(function (id) {
+  ["t-name", "t-mail", "t-lic", "gc-mail", "gc-lic", "gc-salary"].forEach(function (id) {
     $(id).addEventListener(id.indexOf("lic") > -1 || id === "gc-salary" ? "change" : "input", function () { if (this.getAttribute("aria-invalid") === "true") mark(id, true, ""); });
   });
   ["t-consent", "gc-consent"].forEach(function (id) {
@@ -1700,6 +1754,10 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
   var I18N_SKIP = "svg, script, style, pre, .status, .hint";
   var LETTERS = /[A-Za-zÄÖÜäöüß]/;
   var EN = /*EN-BEGIN*/{
+"Danke, Ihr Profil ist bei uns.": "Thank you, we have your profile.",
+"Wir melden uns persönlich, sobald eine Stelle zu Ihnen passt.": "We will get in touch personally as soon as a role suits you.",
+"Danke für Ihre Angaben.": "Thank you for your details.",
+"Den Gehaltsreport schicken wir Ihnen als Erstes, sobald genug Daten zusammen sind.": "You will be the first to receive the salary report as soon as we have enough data.",
 "Mehr dazu in unserer <a href=\"datenschutz/\">Datenschutzerklärung<\/a>.": "More in our <a href=\"datenschutz/\">privacy policy<\/a>.",
 "Impressum": "Legal notice",
 "Datenschutz": "Privacy",
@@ -1782,7 +1840,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
 "Was ist Ihnen bei einem Wechsel wichtig?": "What matters to you in a move?",
 "Ich bin einverstanden, dass Ressel &amp; Müller meine Angaben speichert, um mir passende Stellen anzubieten. Mein Profil geht nur mit meiner Zustimmung an Arbeitgeber. Widerruf jederzeit per Mail.": "I agree that Ressel &amp; Müller stores my details in order to offer me suitable roles. My profile only goes to employers with my consent. I can withdraw this at any time by email.",
 "Profil senden <x/>": "Send profile <x/>",
-"Die Seite speichert nichts selbst. Im nächsten Schritt öffnen Sie Ihr Mailprogramm oder kopieren den fertigen Text an kontakt@ressel-mueller.de.": "This page does not store anything itself. In the next step you open your email app or copy the finished text and send it to kontakt@ressel-mueller.de.",
+"Ihre Angaben gehen verschlüsselt direkt an uns.": "Your details are sent to us directly and encrypted.",
 "Fast geschafft. Senden Sie diese Mail ab, wir melden uns persönlich.": "Almost done. Send this email and we will get in touch personally.",
 "Mailprogramm öffnen": "Open email app",
 "Text kopieren": "Copy text",
@@ -1877,6 +1935,10 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
 "Kollegen empfehlen": "Recommend colleagues"
 }/*ATTR-END*/;
   var PT = /*PT-BEGIN*/{
+"Danke, Ihr Profil ist bei uns.": "Obrigado, recebemos o seu perfil.",
+"Wir melden uns persönlich, sobald eine Stelle zu Ihnen passt.": "Entraremos em contacto pessoalmente assim que surgir uma vaga adequada para si.",
+"Danke für Ihre Angaben.": "Obrigado pelos seus dados.",
+"Den Gehaltsreport schicken wir Ihnen als Erstes, sobald genug Daten zusammen sind.": "Será o primeiro a receber o relatório salarial assim que tivermos dados suficientes.",
 "Mehr dazu in unserer <a href=\"datenschutz/\">Datenschutzerklärung<\/a>.": "Mais informações na nossa <a href=\"datenschutz/\">política de privacidade<\/a> (em inglês).",
 "Impressum": "Aviso legal",
 "Datenschutz": "Privacidade",
@@ -1960,7 +2022,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
 "Was ist Ihnen bei einem Wechsel wichtig?": "O que é importante para si numa mudança de emprego?",
 "Ich bin einverstanden, dass Ressel &amp; Müller meine Angaben speichert, um mir passende Stellen anzubieten. Mein Profil geht nur mit meiner Zustimmung an Arbeitgeber. Widerruf jederzeit per Mail.": "Concordo que a Ressel &amp; Müller guarde os meus dados para me propor vagas adequadas. O meu perfil só é enviado a empregadores com o meu consentimento. Posso revogar o consentimento a qualquer momento por email.",
 "Profil senden <x/>": "Enviar perfil <x/>",
-"Die Seite speichert nichts selbst. Im nächsten Schritt öffnen Sie Ihr Mailprogramm oder kopieren den fertigen Text an kontakt@ressel-mueller.de.": "Esta página não guarda nada. No passo seguinte, abra a sua aplicação de email ou copie o texto final para o enviar a kontakt@ressel-mueller.de.",
+"Ihre Angaben gehen verschlüsselt direkt an uns.": "Os seus dados são enviados diretamente para nós, de forma encriptada.",
 "Fast geschafft. Senden Sie diese Mail ab, wir melden uns persönlich.": "Quase lá. Envie este email e entraremos em contacto consigo pessoalmente.",
 "Mailprogramm öffnen": "Abrir aplicação de email",
 "Text kopieren": "Copiar texto",
@@ -2056,6 +2118,10 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
 "Kollegen empfehlen": "Recomendar colegas"
 }/*PTATTR-END*/;
   var PL = /*PL-BEGIN*/{
+"Danke, Ihr Profil ist bei uns.": "Dziękujemy, mamy Twój profil.",
+"Wir melden uns persönlich, sobald eine Stelle zu Ihnen passt.": "Skontaktujemy się osobiście, gdy pojawi się oferta pasująca do Ciebie.",
+"Danke für Ihre Angaben.": "Dziękujemy za Twoje dane.",
+"Den Gehaltsreport schicken wir Ihnen als Erstes, sobald genug Daten zusammen sind.": "Raport płacowy otrzymasz jako pierwszy, gdy tylko zbierzemy wystarczająco dużo danych.",
 "Mehr dazu in unserer <a href=\"datenschutz/\">Datenschutzerklärung<\/a>.": "Więcej w naszej <a href=\"datenschutz/\">polityce prywatności<\/a> (w języku angielskim).",
 "Impressum": "Nota prawna",
 "Datenschutz": "Prywatność",
@@ -2137,7 +2203,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
 "Was ist Ihnen bei einem Wechsel wichtig?": "Co jest dla Ciebie ważne przy zmianie pracy?",
 "Ich bin einverstanden, dass Ressel &amp; Müller meine Angaben speichert, um mir passende Stellen anzubieten. Mein Profil geht nur mit meiner Zustimmung an Arbeitgeber. Widerruf jederzeit per Mail.": "Wyrażam zgodę na przechowywanie moich danych przez Ressel &amp; Müller w celu przedstawiania mi odpowiednich ofert. Mój profil trafia do pracodawców wyłącznie za moją zgodą. Zgodę mogę w każdej chwili cofnąć mailowo.",
 "Profil senden <x/>": "Wyślij profil <x/>",
-"Die Seite speichert nichts selbst. Im nächsten Schritt öffnen Sie Ihr Mailprogramm oder kopieren den fertigen Text an kontakt@ressel-mueller.de.": "Ta strona sama niczego nie zapisuje. W następnym kroku otworzysz program pocztowy lub skopiujesz gotowy tekst i wyślesz go na adres kontakt@ressel-mueller.de.",
+"Ihre Angaben gehen verschlüsselt direkt an uns.": "Twoje dane trafiają bezpośrednio do nas w formie zaszyfrowanej.",
 "Fast geschafft. Senden Sie diese Mail ab, wir melden uns persönlich.": "Prawie gotowe. Wyślij tę wiadomość, a skontaktujemy się z Tobą osobiście.",
 "Mailprogramm öffnen": "Otwórz program pocztowy",
 "Text kopieren": "Skopiuj tekst",
@@ -2306,7 +2372,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
     });
     document.documentElement.lang = HTML_LANG[want];
     /* Reset anything that was generated in the previous language */
-    ["tpResult", "gcResult"].forEach(function (id) { $(id).hidden = true; });
+    ["tpResult", "gcResult", "tpOk", "gcOk"].forEach(function (id) { $(id).hidden = true; });
     Array.prototype.forEach.call(document.querySelectorAll("#tpForm .err, #gcForm .err"), function (f) { f.classList.remove("err"); });
     Array.prototype.forEach.call(document.querySelectorAll("#tpForm [aria-invalid], #gcForm [aria-invalid]"), function (el) { el.setAttribute("aria-invalid", "false"); el.removeAttribute("aria-describedby"); });
     Array.prototype.forEach.call(document.querySelectorAll("#tpForm .hint, #gcForm .hint"), function (h) { h.textContent = ""; });
